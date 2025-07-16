@@ -82,4 +82,17 @@ export class TaskService {
       : task))
   }
 
+  private generateTaskId(): string {
+    const tasks = this.listTask();
+    const maxId = tasks
+      .map(task => {
+        const taskId = task.id.replace('task', '')
+        return parseInt(taskId, 10)
+      })
+      .filter(id => !isNaN(id))
+      .reduce((max, current) => Math.max(max, current), 0)
+
+    return `task${maxId}`;
+  }
+
 }
