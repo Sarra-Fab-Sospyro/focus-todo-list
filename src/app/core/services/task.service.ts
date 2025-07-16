@@ -72,14 +72,30 @@ export class TaskService {
     return this.listTask.asReadonly();
   }
 
-  updateTaskList(listTask: Task[]) {
-    this.listTask.update((currentTasks) => currentTasks = listTask);
-  }
 
   toggleTaskCompleteStaus(taskId: string) {
     this.listTask.update(tasks => tasks.map(task => task.id === taskId ?
       { ...task, isCompleted: !task.isCompleted }
       : task))
+  }
+
+  addTask(newTaskData: Omit<Task, 'id' | 'createdAt'>): void {
+    const newTask = {
+      ...newTaskData,
+      id: this.generateTaskId(),
+      createdAt: new Date()
+    }
+    this.listTask.update((tasks) => [...tasks, newTask]);
+  }
+
+  deleteTask(id: string) {
+    this.listTask.update((list) => list.filter(task => task.id !== id));
+  }
+
+  updateTask(id: string, taskUpdated: Partial<Omit<Task, 'id' | 'createdAt'>>): void {
+    this.listTask.update((list) => list.map(
+      task => task.id === id ? { ...task, ...taskUpdated } : task
+    ))
   }
 
   private generateTaskId(): string {
