@@ -72,6 +72,9 @@ export class TaskService {
     return this.listTask.asReadonly();
   };
 
+  getTaskById(id: string): Task | undefined {
+    return this.listTask().find(task => task.id === id);
+  };
 
   toggleTaskCompleteStaus(taskId: string) {
     this.listTask.update(tasks => tasks.map(task => task.id === taskId ?
@@ -89,19 +92,17 @@ export class TaskService {
     this.listTask.update((tasks) => [...tasks, newTask]);
   };
 
-  deleteTask(id: string) {
-    this.listTask.update((list) => list.filter(task => task.id !== id));
-  };
-
+  
   updateTask(id: string, taskUpdated: Partial<Omit<Task, 'id' | 'createdAt'>>): void {
     this.listTask.update((list) => list.map(
       task => task.id === id ? { ...task, ...taskUpdated, updatedAt: new Date() } : task
     ))
   };
-
-  getTaskById(id: string): Task | undefined {
-    return this.listTask().find(task => task.id === id);
+  
+  deleteTask(id: string) {
+    this.listTask.update((list) => list.filter(task => task.id !== id));
   };
+
 
   // method to generate id, incrementing by one from the highest number 
   private generateTaskId(): string {

@@ -12,10 +12,10 @@ export interface Goal {
   isCompleted: boolean
   targetCount: number,
   createdAt: Date,
-  frequencyGoal: Exclude<TaskFrequency, TaskFrequency.DAILY>, // exclude Daily from an enum
+  frequencyGoal: Exclude<TaskFrequency, TaskFrequency.DAILY | TaskFrequency.ONE_TIME>, // exclude Daily from an enum
   updatedAt?: Date,
   description?: string,
-  listTasks?: Task[]
+  listIdTasks?: string[]
 }
 
 
