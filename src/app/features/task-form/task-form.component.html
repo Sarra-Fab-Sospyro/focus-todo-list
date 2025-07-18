@@ -1,0 +1,57 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="formTask">
+  <div>
+    <label for="title">Title:</label>
+    <input 
+      type="text" 
+      name="title" 
+      id="title" 
+      formControlName="title" />
+  </div>
+
+  <div>
+    <label for="dueDate">Due Date:</label>
+    <input type="date" name="dueDate" id="dueDate" formControlName="dueDate" />
+  </div>
+
+  <div>
+    <label for="category">Category:</label>
+    <select formControlName="category" id="category">
+      <option disabled selected [value]="null">Select a category</option>
+      @for(category of categories; track category){
+        <option value="{{category}}">{{category}}</option>
+      }
+    </select>
+  </div>
+
+  <div>
+    <label for="frequency">Frequency:</label>
+  <select formControlName="frequency" id="frequency">
+    <option disabled selected [value]="null">Select a frequency</option>
+    @for(frequency of frequencies; track frequency){
+    <option value="{{frequency}}">{{frequency}}</option>
+    }
+  </select>
+  </div>
+
+  <div>
+    <label for="priority">Priority:</label>
+    <select formControlName="priority" id="priority">
+      <option disabled selected [value]="null">Select a priority</option>
+      @for(priority of priorities; track priority){
+      <option value="{{priority}}">{{priority}}</option>
+      }
+    </select>
+  </div>
+
+  <div>
+    <label for="description">Description</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+
+  <div>
+    <label for="goalId">Goal ID:</label>
+    <input type="text" name="goalId" id="goalId" formControlName="goalId" />
+  </div>
+
+  <button type="submit" [disabled]="formTask.invalid">{{ isUpdatedMode() ? 'Update' : 'Submit'}}</button>
+</form>

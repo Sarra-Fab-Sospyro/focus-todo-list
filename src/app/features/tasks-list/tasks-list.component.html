@@ -1,4 +1,3 @@
-
 <div>
   <button (click)="onFilterChange('all')">All</button>
   <button (click)="onFilterChange(TaskFrequency.DAILY)">Daily</button>
@@ -11,13 +10,20 @@
   <span>
     <ul>
       <li [class]="task.isCompleted | completedTask">
-        {{task.title}}
-        <input 
-          type="checkbox" 
+        {{ task.title }}
+        <input
+          type="checkbox"
           [checked]="task.isCompleted"
-          (change)="changeStatus(task.id)" 
+          (change)="toggleTaskStatus(task.id)"
           aria-label="Toggle task completion"
-          />
+        />
+        <button (click)="selectTask(task.id)">Select task</button>
+        <button
+          (click)="deleteTask(task.id)"
+          style="background-color: rgb(194, 33, 33); color: bisque"
+        >
+          Delete task
+        </button>
       </li>
     </ul>
   </span>

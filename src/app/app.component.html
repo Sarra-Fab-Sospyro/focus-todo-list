@@ -1,2 +1,3 @@
 <app-quote></app-quote>
-<app-tasks-list></app-tasks-list>
+<app-tasks-list (taskSelected)="taskSelected($event)"></app-tasks-list>
+<app-task-form [(idInput)]="idTask"></app-task-form>
