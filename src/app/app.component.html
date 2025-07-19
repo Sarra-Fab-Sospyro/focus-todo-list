@@ -1,3 +1,5 @@
 <app-quote></app-quote>
-<app-tasks-list (taskSelected)="taskSelected($event)"></app-tasks-list>
+<app-tasks-list (taskSelected)="idTaskSelected($event)"></app-tasks-list>
 <app-task-form [(idInput)]="idTask"></app-task-form>
+<app-goal-list (goalSelected)="idGoalSelected($event)"></app-goal-list>
+<app-goal-form [(idInput)]="idGoal"></app-goal-form>

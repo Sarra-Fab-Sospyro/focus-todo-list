@@ -1,6 +1,7 @@
 import { computed, Injectable, Signal, signal } from '@angular/core';
 import { Goal } from '../models/goal.model';
 import { TaskFrequency } from '../enums/task-frequency';
+import { TaskCategory } from '../enums/task-category';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class GoalService {
       id: 'goal1',
       title: 'Push on gitHub the Project',
       createdAt: new Date(),
-      frequencyGoal: TaskFrequency.WEEKLY,
+      category: TaskCategory.GOAL,
+      dueDate: new Date(),
       isCompleted: false,
       targetCount: 20,
       description: 'End the client side of Focus APP "onFocus"',
@@ -22,7 +24,8 @@ export class GoalService {
       id: 'goal2',
       title: 'Go to concert',
       createdAt: new Date(),
-      frequencyGoal: TaskFrequency.ANNUAL,
+      category: TaskCategory.PERSONAL,
+      dueDate: new Date('07/28/2026'),
       isCompleted: false,
       targetCount: 0,
     },
@@ -30,7 +33,8 @@ export class GoalService {
       id: 'goal3',
       title: 'Deploy project ',
       createdAt: new Date(),
-      frequencyGoal: TaskFrequency.MONTHLY,
+      category: TaskCategory.WORK,
+      dueDate: new Date(),
       isCompleted: false,
       targetCount: 0,
       description: 'Deploy Focus APP "onFocus"',
@@ -42,12 +46,13 @@ export class GoalService {
 
   pendingGoals = computed(() => this.listGoals().filter(goal => !goal.isCompleted));
 
-  goalsByFrequency = computed(() => {
+  goalsByCategory = computed(() => {
     const goals = this.listGoals();
     return {
-      [TaskFrequency.ANNUAL]: goals.filter(goal => goal.frequencyGoal === TaskFrequency.ANNUAL),
-      [TaskFrequency.MONTHLY]: goals.filter(goal => goal.frequencyGoal === TaskFrequency.MONTHLY),
-      [TaskFrequency.WEEKLY]: goals.filter(goal => goal.frequencyGoal === TaskFrequency.WEEKLY),
+      [TaskCategory.GOAL]: goals.filter(goal => goal.category === TaskCategory.GOAL),
+      [TaskCategory.HABIT]: goals.filter(goal => goal.category === TaskCategory.HABIT),
+      [TaskCategory.PERSONAL]: goals.filter(goal => goal.category === TaskCategory.PERSONAL),
+      [TaskCategory.WORK]: goals.filter(goal => goal.category === TaskCategory.WORK),
     }
   });
 
@@ -80,7 +85,7 @@ export class GoalService {
   };
 
 
-  updateGoal(id: string, goalUpdate: Partial<Omit<Goal, 'id' | 'createdAt'>>): void {
+  updateGoal(id: string, goalUpdate: Partial<Omit<Goal, 'id' | 'createdAt' | 'isCompleted'>>): void {
     this.listGoals.update((list) => list.map(
       goal => goal.id === id
         ? { ...goal, ...goalUpdate, updateGoal: new Date() } : goal

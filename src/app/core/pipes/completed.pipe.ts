@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'completedTask'
+  name: 'completed'
 })
-export class CompletedTaskPipe implements PipeTransform {
+export class CompletedPipe implements PipeTransform {
 
   transform(value: boolean): string {
 

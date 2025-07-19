@@ -1,15 +1,13 @@
 <div>
-  <button (click)="onFilterChange('all')">All</button>
-  <button (click)="onFilterChange(TaskFrequency.DAILY)">Daily</button>
-  <button (click)="onFilterChange(TaskFrequency.MONTHLY)">Monthly</button>
-  <button (click)="onFilterChange(TaskFrequency.ANNUAL)">Annual</button>
-  <button (click)="onFilterChange(TaskFrequency.ONE_TIME)">One time</button>
+  @for(filter of taskFilters; track filter){
+    <button (click)="onFilterChange(filter)">{{filter}}</button>
+  }
 </div>
 <div>
   @for(task of listTask(); track task.id){
   <span>
     <ul>
-      <li [class]="task.isCompleted | completedTask">
+      <li [class]="task.isCompleted | completed">
         {{ task.title }}
         <input
           type="checkbox"

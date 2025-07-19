@@ -1,5 +1,4 @@
-import { TaskFrequency } from "../enums/task-frequency";
-import { Task } from "./task.model";
+import { TaskCategory } from "../enums/task-category";
 
 /**
  *  Interface about Goal 
@@ -12,7 +11,8 @@ export interface Goal {
   isCompleted: boolean
   targetCount: number,
   createdAt: Date,
-  frequencyGoal: Exclude<TaskFrequency, TaskFrequency.DAILY | TaskFrequency.ONE_TIME>, // exclude Daily from an enum
+  category: TaskCategory, // exclude Daily from an enum
+  dueDate: Date,
   updatedAt?: Date,
   description?: string,
   listIdTasks?: string[]

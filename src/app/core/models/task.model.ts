@@ -12,10 +12,8 @@ export interface Task {
   isCompleted: boolean,
   category: TaskCategory,
   priority: TaskPriority,
-  frequency: TaskFrequency,
   createdAt: Date,
   updatedAt?: Date,
-  description?: string
   goalId?: string,
   dueDate?: Date
 }

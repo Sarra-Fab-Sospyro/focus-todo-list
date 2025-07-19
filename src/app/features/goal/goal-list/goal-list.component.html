@@ -1,0 +1,32 @@
+<div>
+  @for(filter of filtersGoal; track filter){
+    <button
+    (click)="onFilterChange(filter)">{{filter}}</button>
+  }
+</div>
+
+<div>
+  @for(goal of listGoals(); track goal.id){
+  <span>
+    <ul>
+      <li [class]="goal.isCompleted | completed">
+        {{ goal.title }}
+        <input 
+          type="checkbox" 
+          [checked]="goal.isCompleted" 
+          (change)="toggleGoalStatus(goal.id)"
+          aria-label="Toggle goal completion" 
+          />
+        <button (click)="selectGoal(goal.id)">Select goal</button>
+        <button 
+          (click)="deleteGoal(goal.id)" 
+          style="background-color: rgb(194, 33, 33); color: bisque"
+          >
+          Delete goal
+        </button>
+        <span>{{goal.targetCount}}</span>
+      </li>
+    </ul>
+  </span>
+  }
+</div>

@@ -1,8 +1,8 @@
-import { CompletedTaskPipe } from './completed-task.pipe';
+import { CompletedPipe } from './completed.pipe';
 
 describe('CompletedTaskPipe', () => {
   it('create an instance', () => {
-    const pipe = new CompletedTaskPipe();
+    const pipe = new CompletedPipe();
     expect(pipe).toBeTruthy();
   });
 });

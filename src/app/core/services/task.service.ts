@@ -15,7 +15,6 @@ export class TaskService {
       isCompleted: false,
       category: TaskCategory.GOAL,
       priority: TaskPriority.HIGH,
-      frequency: TaskFrequency.ONE_TIME,
       createdAt: new Date()
     },
     {
@@ -24,7 +23,6 @@ export class TaskService {
       isCompleted: false,
       category: TaskCategory.GOAL,
       priority: TaskPriority.HIGH,
-      frequency: TaskFrequency.ONE_TIME,
       createdAt: new Date()
     },
     {
@@ -33,7 +31,6 @@ export class TaskService {
       isCompleted: false,
       category: TaskCategory.HABIT,
       priority: TaskPriority.MEDIUM,
-      frequency: TaskFrequency.DAILY,
       createdAt: new Date()
     },
     {
@@ -42,7 +39,6 @@ export class TaskService {
       isCompleted: false,
       category: TaskCategory.HABIT,
       priority: TaskPriority.MEDIUM,
-      frequency: TaskFrequency.DAILY,
       createdAt: new Date()
     },
   ]);
@@ -57,7 +53,7 @@ export class TaskService {
     return {
       [TaskCategory.GOAL]: tasks.filter(task => task.category === TaskCategory.GOAL),
       [TaskCategory.HABIT]: tasks.filter(task => task.category === TaskCategory.HABIT),
-      [TaskCategory.GENERAL]: tasks.filter(task => task.category === TaskCategory.GENERAL),
+      [TaskCategory.WORK]: tasks.filter(task => task.category === TaskCategory.WORK),
       [TaskCategory.PERSONAL]: tasks.filter(task => task.category === TaskCategory.PERSONAL),
     }
   });
@@ -93,7 +89,7 @@ export class TaskService {
   };
 
   
-  updateTask(id: string, taskUpdated: Partial<Omit<Task, 'id' | 'createdAt'>>): void {
+  updateTask(id: string, taskUpdated: Partial<Omit<Task, 'id' | 'createdAt' | 'isCompleted'>>): void {
     this.listTask.update((list) => list.map(
       task => task.id === id ? { ...task, ...taskUpdated, updatedAt: new Date() } : task
     ))

@@ -1,5 +1,5 @@
 export enum TaskCategory {
-  GENERAL = 'general',
+  WORK = 'work',
   GOAL = 'goal',
   HABIT = 'habit',
   PERSONAL = 'personal'
