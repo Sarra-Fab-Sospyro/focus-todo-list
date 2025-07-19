@@ -1,0 +1,21 @@
+@if(idGoalDetails()){
+<div>{{goal?.title}}</div>
+<div>{{goal?.targetCount}}</div>
+<ul>
+  <li>{{goal?.description}}</li>
+  @if(tasks && tasks.length >0){
+  <ul>
+    @for(task of tasks; track task.id){
+    <li>
+      <em>{{task.title}} </em>
+      <span>{{task.isCompleted? 'Task Completed': 'Task Not Completed'}}</span>
+    </li>
+    }
+  </ul>
+  }
+  <li>{{goal?.category}}</li>
+  <li>{{goal?.dueDate}}</li>
+  <li>{{goal?.createdAt}}</li>
+  <li>{{goal?.isCompleted? 'Completed': 'Not Completed'}}</li>
+</ul>
+}

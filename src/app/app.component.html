@@ -3,3 +3,10 @@
 <app-task-form [(idInput)]="idTask"></app-task-form>
 <app-goal-list (goalSelected)="idGoalSelected($event)"></app-goal-list>
 <app-goal-form [(idInput)]="idGoal"></app-goal-form>
+
+<div style="background-color: aquamarine;">---</div>
+<h2>DETAILS TASK</h2>
+<app-task-details [(idTaskDetails)]="idTask"></app-task-details>
+<div style="background-color: aquamarine;">---</div>
+<h2>DETAILS GOAL</h2>
+<app-goal-details [(idGoalDetails)]="idGoal"></app-goal-details>
