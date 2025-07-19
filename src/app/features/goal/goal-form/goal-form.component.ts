@@ -52,15 +52,18 @@ export class GoalFormComponent {
     } else {
       this.goalService.addGoal(this.formGoal.value);
     }
-    console.log('verifico', this.formGoal.value)
-    this.idInput.set('');
-    this.formGoal.removeControl('isCompleted')
-    this.formGoal.reset();
-  }
+    this.resetForm()
+  };
 
   onCancel() {
+    this.resetForm()
+  };
+
+  private resetForm() {
+    this.idInput.set("");
+    this.formGoal.removeControl('isCompleted')
     this.formGoal.reset();
-  }
+  };
 
   private initForm() {
     this.formGoal = this.fb.group<GoalFormControl>({

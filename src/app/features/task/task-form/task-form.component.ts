@@ -61,12 +61,16 @@ export class TaskFormComponent {
     } else {
       this.taskService.addTask(this.formTask.value);
     }
-    this.idInput.set("");
-    this.formTask.removeControl('isCompleted')
-    this.formTask.reset();
+    this.resetForm();
   };
 
   onCancel() {
+    this.resetForm();
+  };
+
+  private resetForm() {
+    this.idInput.set("");
+    this.formTask.removeControl('isCompleted')
     this.formTask.reset();
   };
 
