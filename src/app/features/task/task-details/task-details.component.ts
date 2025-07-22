@@ -1,6 +1,7 @@
 import { Component, effect, inject, input } from '@angular/core';
 import { Task } from '../../../core/models/task.model';
 import { TaskService } from '../../../core/services/task.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-details',
@@ -11,8 +12,11 @@ import { TaskService } from '../../../core/services/task.service';
 export class TaskDetailsComponent {
 
   id = input<string>();
+  returnUrl = input<string>('/');
   task?: Task
   private taskService = inject(TaskService);
+  private router = inject(Router);
+
 
 
   constructor() {
@@ -24,5 +28,7 @@ export class TaskDetailsComponent {
       } return this.task
     })
   }
-
+  goBack() {
+    this.router.navigate([this.returnUrl()]);
+  }
 }

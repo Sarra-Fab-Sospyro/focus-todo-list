@@ -47,14 +47,20 @@ export class GoalListComponent {
   };
 
   selectGoal(id: string) {
-    this.router.navigate([`goals/${id}`]);
+    this.router.navigate([`goals/${id}`],
+      {
+        queryParams: { returnUrl: this.router.url }
+      }
+    );
     console.log(`id goal: ${id}`);
   };
 
   updateGoal(id: string) {
-    this.router.navigate([`goals/${id}/edit`], {
-      queryParams: { returnUrl: this.router.url }
-    });
+    this.router.navigate([`goals/${id}/edit`],
+      {
+        queryParams: { returnUrl: this.router.url }
+      }
+    );
   };
 
   deleteGoal(id: string) {

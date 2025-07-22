@@ -46,14 +46,20 @@ export class TasksListComponent implements OnInit {
   }
 
   selectTask(id: string) {
-    this.router.navigate([`tasks/${id}`]);
+    this.router.navigate([`tasks/${id}`],
+      {
+        queryParams: { returnUrl: this.router.url }
+      }
+    );
     console.log(`id task: ${id}`);
   }
 
   updateTask(id: string) {
-    this.router.navigate([`tasks/${id}/edit`], {
-      queryParams: { returnUrl: this.router.url }
-    });
+    this.router.navigate([`tasks/${id}/edit`],
+      {
+        queryParams: { returnUrl: this.router.url }
+      }
+    );
   }
 
   deleteTask(id: string) {
