@@ -1,8 +1,8 @@
-import { Component, effect, inject, model } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { Goal } from '../../../core/models/goal.model';
+import { Task } from '../../../core/models/task.model';
 import { GoalService } from '../../../core/services/goal.service';
 import { TaskService } from '../../../core/services/task.service';
-import { Task } from '../../../core/models/task.model';
 
 @Component({
   selector: 'app-goal-details',
@@ -11,7 +11,7 @@ import { Task } from '../../../core/models/task.model';
   styleUrl: './goal-details.component.scss'
 })
 export class GoalDetailsComponent {
-  idGoalDetails = model<string>();
+  id = input<string>();
   goal?: Goal;
   tasks?: Task[];
   private goalService = inject(GoalService);
@@ -20,7 +20,7 @@ export class GoalDetailsComponent {
 
   constructor() {
     effect(() => {
-      const idGoal = this.idGoalDetails();
+      const idGoal = this.id();
 
       if (idGoal) {
         this.goal = this.goalService.getGoalById(idGoal);

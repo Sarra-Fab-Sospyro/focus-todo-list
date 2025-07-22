@@ -1,19 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { QuotesApiService } from '../../core/services/quotes-api.service';
-import { AsyncPipe } from '@angular/common';
+import { Component, input } from '@angular/core';
 @Component({
   selector: 'app-quote',
-  imports: [AsyncPipe],
+  imports: [],
   templateUrl: './quote.component.html',
-  styleUrl: './quote.component.scss'
+  styleUrls: ['./quote.component.scss']
 })
-export class QuoteComponent implements OnInit {
+export class QuoteComponent  {
 
-  private quoteService = inject(QuotesApiService);
-  quote$!: Observable<{author: string, body: string}>;
+  quote = input<{ author: string, body: string }>();
 
-  ngOnInit(): void {
-    this.quote$ = this.quoteService.getQuoteOfDay();
-  }
 }

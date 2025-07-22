@@ -1,13 +1,12 @@
-import { Component, effect, inject, input, model, signal } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TaskCategory } from '../../../core/enums/task-category';
-import { TaskFrequency } from '../../../core/enums/task-frequency';
 import { TaskPriority } from '../../../core/enums/task-priority';
 import { TaskFormControls } from '../../../core/models/task-form-controls.models';
 import { TaskService } from '../../../core/services/task.service';
@@ -20,7 +19,8 @@ import { TaskService } from '../../../core/services/task.service';
   providers: [],
 })
 export class TaskFormComponent {
-  idInput = model<string>();
+  id = input<string>();
+  returnUrl = input<string>('/tasks');
 
   formTask!: FormGroup;
   isUpdatedMode = signal<boolean>(false);
@@ -29,12 +29,13 @@ export class TaskFormComponent {
 
   private fb = inject(FormBuilder);
   private taskService = inject(TaskService);
+  private router = inject(Router);
 
   constructor() {
     this.initForm();
 
     effect(() => {
-      const idTask = this.idInput();
+      const idTask = this.id();
       if (idTask) {
         this.isUpdatedMode.set(true);
         this.loadTasksForUpdate(idTask);
@@ -50,7 +51,7 @@ export class TaskFormComponent {
     }
 
     if (this.isUpdatedMode()) {
-      const idTask = this.idInput();
+      const idTask = this.id();
       if (idTask) {
         const taskUpdated = {
           ...this.formTask.value,
@@ -61,7 +62,9 @@ export class TaskFormComponent {
     } else {
       this.taskService.addTask(this.formTask.value);
     }
+
     this.resetForm();
+    this.router.navigate([this.returnUrl() || '/tasks']);
   };
 
   onCancel() {
@@ -69,7 +72,6 @@ export class TaskFormComponent {
   };
 
   private resetForm() {
-    this.idInput.set("");
     this.formTask.removeControl('isCompleted')
     this.formTask.reset();
   };

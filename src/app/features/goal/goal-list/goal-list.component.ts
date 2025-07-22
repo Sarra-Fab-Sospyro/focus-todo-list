@@ -1,4 +1,5 @@
-import { Component, computed, inject, output, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { TaskCategory } from '../../../core/enums/task-category';
 import { CompletedPipe } from '../../../core/pipes/completed.pipe';
 import { GoalService } from '../../../core/services/goal.service';
@@ -13,7 +14,6 @@ type GoalFilter = TaskCategory | 'all';
 })
 export class GoalListComponent {
 
-  goalSelected = output<string>();
 
   currentFilter = signal<string>('all');
   listGoals = computed(() => {
@@ -33,6 +33,7 @@ export class GoalListComponent {
     ...Object.values(TaskCategory)
   ];
 
+  private router = inject(Router);
   private goalService = inject(GoalService);
   private listAllGoals = this.goalService.getGoalist();
 
@@ -46,11 +47,17 @@ export class GoalListComponent {
   };
 
   selectGoal(id: string) {
-    this.goalSelected.emit(id);
+    this.router.navigate([`goals/${id}`]);
     console.log(`id goal: ${id}`);
+  };
+
+  updateGoal(id: string) {
+    this.router.navigate([`goals/${id}/edit`], {
+      queryParams: { returnUrl: this.router.url }
+    });
   };
 
   deleteGoal(id: string) {
     this.goalService.delete(id);
-  }
+  };
 }

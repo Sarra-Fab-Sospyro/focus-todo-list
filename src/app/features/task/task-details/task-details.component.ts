@@ -1,4 +1,4 @@
-import { Component, effect, inject, model } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { Task } from '../../../core/models/task.model';
 import { TaskService } from '../../../core/services/task.service';
 
@@ -10,14 +10,14 @@ import { TaskService } from '../../../core/services/task.service';
 })
 export class TaskDetailsComponent {
 
-  idTaskDetails = model<string>();
+  id = input<string>();
   task?: Task
   private taskService = inject(TaskService);
 
 
   constructor() {
     effect(() => {
-      const idTask = this.idTaskDetails();
+      const idTask = this.id();
 
       if (idTask) {
         this.task = this.taskService.getTaskById(idTask);

@@ -1,8 +1,9 @@
-import { Component, effect, inject, model, signal } from '@angular/core';
+import { Component, effect, inject, input, model, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TaskCategory } from '../../../core/enums/task-category';
 import { GoalService } from '../../../core/services/goal.service';
 import { GoalFormControl } from '../../../core/models/goal-form-control.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-goal-form',
@@ -12,7 +13,8 @@ import { GoalFormControl } from '../../../core/models/goal-form-control.model';
 })
 export class GoalFormComponent {
 
-  idInput = model<string>();
+  id = input<string>();
+  returnUrl = input<string>('/goals');
 
   formGoal!: FormGroup;
   isUpdatedMode = signal<boolean>(false);
@@ -20,12 +22,13 @@ export class GoalFormComponent {
 
   private fb = inject(FormBuilder);
   private goalService = inject(GoalService);
+  private router = inject(Router);
 
   constructor() {
     this.initForm();
 
     effect(() => {
-      const idGoal = this.idInput();
+      const idGoal = this.id();
       if (idGoal) {
         this.isUpdatedMode.set(true);
         this.loadGoalsForUpdate(idGoal);
@@ -41,7 +44,7 @@ export class GoalFormComponent {
     }
 
     if (this.isUpdatedMode()) {
-      const idGoal = this.idInput()
+      const idGoal = this.id()
       if (idGoal) {
         const goalUpdated = {
           ...this.formGoal.value,
@@ -53,6 +56,8 @@ export class GoalFormComponent {
       this.goalService.addGoal(this.formGoal.value);
     }
     this.resetForm()
+    this.router.navigate([this.returnUrl() || '/goals']);
+
   };
 
   onCancel() {
@@ -60,7 +65,6 @@ export class GoalFormComponent {
   };
 
   private resetForm() {
-    this.idInput.set("");
     this.formGoal.removeControl('isCompleted')
     this.formGoal.reset();
   };

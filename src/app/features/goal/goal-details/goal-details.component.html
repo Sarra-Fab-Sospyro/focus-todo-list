@@ -1,4 +1,4 @@
-@if(idGoalDetails()){
+@if(id()){
 <div>{{goal?.title}}</div>
 <div>{{goal?.targetCount}}</div>
 <ul>
@@ -14,7 +14,7 @@
   </ul>
   }
   <li>{{goal?.category}}</li>
-  <li>{{goal?.dueDate}}</li>
+  <li>{{goal?.dueDate ?? 'not date'}}</li>
   <li>{{goal?.createdAt}}</li>
   <li>{{goal?.isCompleted? 'Completed': 'Not Completed'}}</li>
 </ul>

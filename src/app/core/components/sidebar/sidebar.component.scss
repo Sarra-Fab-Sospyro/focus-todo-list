@@ -1,0 +1,37 @@
+.sidebar {
+  width: 20rem;
+  height: 100vh;
+  padding: 2rem 0;
+  background: #8B5A3C;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      color: #F5E6D3;
+      font-size: 1.6rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      margin: 3rem 2rem;
+      cursor: pointer;
+      transition: all .5s ease-out;
+      border-left: 4px solid transparent;
+      
+      &:hover {
+        background: rgba(245, 230, 211, 0.1);
+        border-left: 4px solid #F5E6D3;
+        transform: translateX(5px),
+      }
+
+      &.active {
+        background: rgba(245, 230, 211, 0.15);
+        border-left: 4px solid #F5E6D3;
+        color: #fff;
+
+      }
+    }
+  }
+}

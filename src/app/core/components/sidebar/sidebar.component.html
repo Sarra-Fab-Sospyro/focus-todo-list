@@ -1,0 +1,9 @@
+<div class="sidebar">
+  <ul>
+    <li (click)="goTo('')" [class.active]="isActive(DASHBOARD)">Home</li>
+    <li (click)="goTo(TASKS)" [class.active]="isActive(TASKS)">Tasks</li>
+    <li (click)="goTo(CREATE_TASKS)" [class.active]="isActive(CREATE_TASKS)">Add task</li>
+    <li (click)="goTo(GOALS)" [class.active]="isActive(GOALS)">Goals</li>
+    <li (click)="goTo(CREATE_GOALS)" [class.active]="isActive(CREATE_GOALS)">Add Goals</li>
+  </ul>
+</div>

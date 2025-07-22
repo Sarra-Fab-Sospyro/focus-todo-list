@@ -1,11 +1,11 @@
-@if(idTaskDetails()){
-<div>{{task?.title}}</div>
+@if(task){
+<div>Task name: {{task.title}}</div>
 <ul>
-  <li>{{task?.priority}}</li>
-  <li>{{task?.category}}</li>
-  <li>{{task?.dueDate}}</li>
-  <li>{{task?.goalId?? 'not goal associated'}}</li>
-  <li>{{task?.createdAt}}</li>
-  <li>{{task?.isCompleted? 'Completed': 'Not Completed'}}</li>
+  <li>{{task.priority}}</li>
+  <li>{{task.category}}</li>
+  <li>{{task.dueDate ?? 'not date'}}</li>
+  <li>{{task.goalId?? 'not goal associated'}}</li>
+  <li>{{task.createdAt}}</li>
+  <li>{{task.isCompleted? 'Completed': 'Not Completed'}}</li>
 </ul>
 }

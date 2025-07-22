@@ -1,17 +1,8 @@
-import {
-  Component,
-  computed,
-  inject,
-  OnInit,
-  output,
-  signal,
-  Signal,
-} from '@angular/core';
-import { TaskService } from '../../../core/services/task.service';
-import { Task } from '../../../core/models/task.model';
-import { CompletedPipe } from '../../../core/pipes/completed.pipe';
-import { TaskFrequency } from '../../../core/enums/task-frequency';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { TaskCategory } from '../../../core/enums/task-category';
+import { CompletedPipe } from '../../../core/pipes/completed.pipe';
+import { TaskService } from '../../../core/services/task.service';
 
 type TaskFilter = TaskCategory | 'all';
 
@@ -22,8 +13,6 @@ type TaskFilter = TaskCategory | 'all';
   styleUrl: './tasks-list.component.scss',
 })
 export class TasksListComponent implements OnInit {
-  taskSelected = output<string>();
-
   currentFilter = signal<string>('all');
 
   listTask = computed(() => {
@@ -37,12 +26,13 @@ export class TasksListComponent implements OnInit {
     return filteredTasks;
   });
 
+  private router = inject(Router);
   private taskService = inject(TaskService);
   private allTasks = this.taskService.getTaskList();
   protected readonly taskFilters: TaskFilter[] = [
     ...Object.values(TaskCategory),
     'all'
-  
+
   ];
 
   ngOnInit(): void { }
@@ -56,8 +46,14 @@ export class TasksListComponent implements OnInit {
   }
 
   selectTask(id: string) {
-    this.taskSelected.emit(id);
+    this.router.navigate([`tasks/${id}`]);
     console.log(`id task: ${id}`);
+  }
+
+  updateTask(id: string) {
+    this.router.navigate([`tasks/${id}/edit`], {
+      queryParams: { returnUrl: this.router.url }
+    });
   }
 
   deleteTask(id: string) {
