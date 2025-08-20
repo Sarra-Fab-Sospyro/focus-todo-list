@@ -1,7 +1,6 @@
 import { computed, Injectable, Signal, signal } from '@angular/core';
-import { Goal } from '../models/goal.model';
-import { TaskFrequency } from '../enums/task-frequency';
 import { TaskCategory } from '../enums/task-category';
+import { Goal } from '../models/goal.model';
 
 @Injectable({
   providedIn: 'root'

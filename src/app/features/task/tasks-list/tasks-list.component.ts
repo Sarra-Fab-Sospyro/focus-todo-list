@@ -3,12 +3,14 @@ import { Router } from '@angular/router';
 import { TaskCategory } from '../../../core/enums/task-category';
 import { CompletedPipe } from '../../../core/pipes/completed.pipe';
 import { TaskService } from '../../../core/services/task.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 
 type TaskFilter = TaskCategory | 'all';
 
 @Component({
   selector: 'app-tasks-list',
-  imports: [CompletedPipe],
+  imports: [CompletedPipe, MatCheckboxModule, MatIconModule],
   templateUrl: './tasks-list.component.html',
   styleUrl: './tasks-list.component.scss',
 })

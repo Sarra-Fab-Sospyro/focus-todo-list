@@ -1,10 +1,94 @@
 .completed-task {
-  /* verde molto chiaro */
   color: green;
   text-decoration: line-through;
 }
 
 .pending-task {
   color: red;
-  /* rosso molto chiaro */
+}
+
+//Filter 
+.btn_filter {
+  margin-block: 1rem;
+  margin-inline: 1rem;
+  padding: 0.5rem 2rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  color: #8B5A3C;
+  font-weight: 400;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #F5E6D3;
+    background-color: #8B5A3C;
+  }
+
+  &.active {
+    color: #F5E6D3;
+    background-color: #8B5A3C;
+  }
+}
+
+
+//checkbox
+::ng-deep {
+  .green_check {
+
+    .mdc-checkbox--selected .mdc-checkbox__checkmark-path {
+      stroke: white !important;
+      /* spunta bianca */
+    }
+
+    .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+    .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background {
+      background: #4caf50 !important;
+      /* verde */
+      border-color: #4caf50 !important;
+    }
+  }
+}
+
+@mixin btn-color($base-color) {
+  color: rgba($base-color, 0.77);
+
+  &:hover {
+    color: rgba($base-color, 0.87);
+  }
+
+  &:active {
+    color: $base-color;
+  }
+}
+
+//button-list
+.btn_list {
+  margin-block: 1rem;
+  margin-inline: 1rem;
+  border: 1px solid transparent;
+  border-radius: 25%;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.2s ease;
+  color: inherit;
+
+  &:hover {
+    background: #dbcbb6;
+  }
+
+  &.btn_delete {
+    @include btn-color(#b91a1ac5);
+  }
+
+  &.btn_edit {
+    @include btn-color(#8b5a3cd3);
+  }
+
+  &.btn_info {
+    @include btn-color(#6f4610cc);
+  }
 }

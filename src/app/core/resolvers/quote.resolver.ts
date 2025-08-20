@@ -7,6 +7,7 @@ import { catchError, EMPTY, filter, take } from 'rxjs';
 export const quoteResolver: ResolveFn<Quote> = (route, state) => {
 
   const quoteService = inject(QuotesApiService);
+  
   return quoteService.getQuoteOfDay().pipe(
     filter(quote => !!quote),
     take(1),
