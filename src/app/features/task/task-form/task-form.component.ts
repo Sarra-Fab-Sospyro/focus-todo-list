@@ -68,7 +68,9 @@ export class TaskFormComponent {
   };
 
   onCancel() {
-    this.resetForm();
+    !this.isUpdatedMode() ?
+      this.resetForm() :
+      this.router.navigate([this.returnUrl() || '/tasks']);
   };
 
   private resetForm() {

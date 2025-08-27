@@ -7,6 +7,19 @@
   color: red;
 }
 
+.container_task_list {
+  padding: min(2rem, 4%);
+  max-width: 100%;
+  overflow-x: auto; 
+}
+
+.header_task_list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
 //Filter 
 .btn_filter {
   margin-block: 1rem;
@@ -91,4 +104,49 @@
   &.btn_info {
     @include btn-color(#6f4610cc);
   }
+
+  &.btn_add {
+    @include btn-color(#fff);
+    background: #6f4610cc;
+    border-radius: 50%; 
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: #8b5a3cd3;
+      transform: scale(1.05); 
+    }
+  }
+}
+
+.header_task_list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.body_task_list {
+  overflow-x: auto;
+}
+
+.table {
+  border: 1px solid #8b5a3cd3;
+  border-collapse: collapse;
+  width: 100%;
+
+  th,
+  td {
+    padding: min(1rem, 2%) min(2rem, 4%);
+    border: 1px solid #8b5a3cd3;
+    text-align: center;
+  }
+
+  th {
+    background: #dbcbb6;
+    font-weight: 500;
+  }
+
+
 }

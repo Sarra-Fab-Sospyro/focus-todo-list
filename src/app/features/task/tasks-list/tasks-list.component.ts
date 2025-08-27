@@ -1,10 +1,10 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { TaskCategory } from '../../../core/enums/task-category';
 import { CompletedPipe } from '../../../core/pipes/completed.pipe';
 import { TaskService } from '../../../core/services/task.service';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule } from '@angular/material/icon';
 
 type TaskFilter = TaskCategory | 'all';
 
@@ -66,5 +66,9 @@ export class TasksListComponent implements OnInit {
 
   deleteTask(id: string) {
     this.taskService.deleteTask(id);
+  }
+
+  toNewTask() {
+    this.router.navigate([`tasks/new`]);
   }
 }

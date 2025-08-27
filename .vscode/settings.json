@@ -1,5 +1,10 @@
 {
   "editor.formatOnSave": false,
   "editor.defaultFormatter": "vscode.typescript-language-features",
-  "editor.formatOnPaste": true
+  "editor.formatOnPaste": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#2C3011",
+    "titleBar.activeBackground": "#3D4318",
+    "titleBar.activeForeground": "#FAFBF4"
+  }
 }
